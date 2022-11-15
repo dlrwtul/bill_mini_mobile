@@ -1,5 +1,6 @@
 import 'package:bill_mini_mobile/models/partenaire_model.dart';
 import 'package:bill_mini_mobile/services/partenaire_service.dart';
+import 'package:bill_mini_mobile/views/recherche_facture.dart';
 import 'package:flutter/material.dart';
 
 class PartenaireList extends StatefulWidget {
@@ -47,6 +48,17 @@ class _PartenaireListState extends State<PartenaireList> {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             subtitle: Text(partenaires?[index].code ?? ''),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => RechercheFactures(
+                    idPartenaire: partenaires?[index].id ?? 0,
+                    libelleReferenceClient: partenaires?[index].libelleIdentifiant ,
+                  ),
+                ),
+              );
+            },
           ),
         );
       }),
