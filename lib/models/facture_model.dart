@@ -4,6 +4,7 @@ class Facture {
   String? telephone;
   String? idClient;
   num? montant;
+  String? status;
   String? dateEcheance;
 
   Facture({
@@ -11,6 +12,7 @@ class Facture {
     this.numeroFacture,
     this.telephone,
     this.montant,
+    this.status,
     this.idClient,
     this.dateEcheance,
   });
@@ -19,6 +21,7 @@ class Facture {
       : id = json['id'],
         numeroFacture = json['numeroFacture'],
         montant = json['montant'],
+        status = json['status'],
         telephone = json['telephone'],
         idClient = json['idClient'],
         dateEcheance = json['dateEcheance'];

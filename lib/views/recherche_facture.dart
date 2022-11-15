@@ -6,7 +6,7 @@ class RechercheFactures extends StatefulWidget {
   final int idPartenaire;
   String? libelleReferenceClient = "Reference Client";
   bool isSubmitted = false;
-  Widget list = const Text('data');
+  Widget? list;
   RechercheFactures(
       {Key? key, required this.idPartenaire, this.libelleReferenceClient})
       : super(key: key);
@@ -28,6 +28,7 @@ class _RechercheFacturesState extends State<RechercheFactures> {
             color: Colors.black,
           ),
         ),
+        resizeToAvoidBottomInset: false,
         body: Form(
             key: _formKey,
             child: Column(

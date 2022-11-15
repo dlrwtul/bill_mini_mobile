@@ -9,7 +9,6 @@ class Partenaire {
   String? code;
   String? libelleIdentifiant;
 
-
   Partenaire(
       {this.id,
       this.logo,
@@ -19,8 +18,7 @@ class Partenaire {
       this.email,
       this.code,
       this.telephone,
-      this.libelleIdentifiant
-      });
+      this.libelleIdentifiant});
 
   Partenaire.fromJson(Map<String, dynamic> json)
       : id = json['id'],
@@ -32,5 +30,4 @@ class Partenaire {
         logo = json['logo'],
         telephone = json['telephone'],
         libelleIdentifiant = json['libelleIdentifiant'];
-
 }
