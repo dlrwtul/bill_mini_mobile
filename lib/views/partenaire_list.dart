@@ -40,28 +40,48 @@ class _PartenaireListState extends State<PartenaireList> {
     return ListView.builder(
       itemCount: partenaires?.length,
       itemBuilder: ((context, index) {
-        return Card(
-          elevation: 4,
-          child: ListTile(
-            title: Text(
-              partenaires?[index].nomCommercial ?? "",
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(partenaires?[index].code ?? ''),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => RechercheFactures(
-                    idPartenaire: partenaires?[index].id ?? 0,
-                    libelleReferenceClient: partenaires?[index].libelleIdentifiant ,
-                  ),
-                ),
-              );
-            },
-          ),
-        );
+        return gridItem(context, partenaires?[index]);
       }),
     );
   }
+
+  GridView _buildGridPartenaires(
+          BuildContext context, List<Partenaire>? partenaires) =>
+      GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            childAspectRatio: 0.5,
+            crossAxisSpacing: 0.0,
+            mainAxisSpacing: 0.0),
+        itemBuilder: ((context, index) {
+          return;
+        }),
+      );
 }
+
+Widget gridItem(BuildContext context, Partenaire? partenaire) => Container(
+      width: 25.0,
+      height: 150.0,
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10.0)),
+      child: Card(
+        elevation: 4,
+        child: ListTile(
+          title: Text(
+            partenaire?.nomCommercial ?? "",
+            style: const TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Text(partenaire?.code ?? ''),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => RechercheFactures(
+                  idPartenaire: partenaire?.id ?? 0,
+                  libelleReferenceClient: partenaire?.libelleIdentifiant,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
+    );
