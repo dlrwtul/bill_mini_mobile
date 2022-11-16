@@ -14,6 +14,7 @@ class FactureService {
         "${Constantes.API_URL}factures?idClient=$idClient&partenaire[id]=$idPartenaire"));
     if (response.statusCode == 200) {
       var responseBody = jsonDecode(response.body);
+      debugPrint('statement $responseBody');
       List<dynamic> body = responseBody['data'];
       List<Facture> factures =
           body.map((dynamic item) => Facture.fromJson(item)).toList();
@@ -26,7 +27,7 @@ class FactureService {
 
   Future<Facture> getFacture({int? idFacture}) async {
     final response = await http.get(Uri.parse(
-      "${Constantes.API_URL}detailFacture/$idFacture?currentPayer=$currentPayer"));
+        "${Constantes.API_URL}detailFacture/$idFacture?currentPayer=$currentPayer"));
     if (response.statusCode == 200) {
       var responseBody = jsonDecode(response.body);
 
@@ -35,9 +36,24 @@ class FactureService {
       Facture facture = Facture.fromJson(body);
 
       return facture;
-
     } else {
       throw Exception('Failed toload data');
+    }
+  }
+
+  Future<String> payerFacture({int? idFacture}) async {
+    final response = await http.post(Uri.parse("${Constantes.API_URL}payer"),
+        headers: <String, String>{'Content-Type': 'application/json;charset=UTF-8'},
+        body:jsonEncode( {'id': idFacture, 'currentPayer': currentPayer}));
+        debugPrint('response:${response.body}');
+    if (response.statusCode == 201) {
+      var responseBody = jsonDecode(response.body);
+
+      String body = responseBody['message'];
+
+      return body;
+    } else {
+      throw Exception('Failed to store data');
     }
   }
 }

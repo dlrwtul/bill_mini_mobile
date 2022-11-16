@@ -66,8 +66,6 @@ class _RechercheFacturesState extends State<RechercheFactures> {
                                 idPartenaire: widget.idPartenaire,
                                 idClient: textController.text);
                           });
-                          debugPrint(
-                              'idParternaire:${widget.idPartenaire},idClient:${textController.text}');
                         }
                       },
                       child: const Text('Rechercher')),
