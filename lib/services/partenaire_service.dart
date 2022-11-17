@@ -7,9 +7,14 @@ class PartenaireService {
   // ignore: non_constant_identifier_names
   static String ENTER_POINT = 'partenaires';
 
-  Future<List<Partenaire>> getPartenaires() async {
+  Future<List<Partenaire>> getPartenaires([String? nomCommercial]) async {
+    String searchTerm = ENTER_POINT;
+    if (nomCommercial != '' && nomCommercial != null) {
+      searchTerm += '?nomCommercial[like]=%\\$nomCommercial%';
+    }
     final response =
-        await http.get(Uri.parse(Constantes.API_URL + ENTER_POINT));
+        await http.get(Uri.parse(Constantes.API_URL + searchTerm));
+
     if (response.statusCode == 200) {
       var responseBody = jsonDecode(response.body);
       List<dynamic> body = responseBody['data'];
